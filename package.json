@@ -93,5 +93,8 @@
     "*.{js,css,json,md}": [
       "prettier --write"
     ]
+  },
+  "engines": {
+    "node": "14.16.0"
   }
 }
