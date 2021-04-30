@@ -1,0 +1,51 @@
+.Polaris-DataTable__Cell--verticalAlignTop {
+  white-space: nowrap;
+}
+
+.Polaris-Stack.Polaris-Stack--distributionTrailing.Polaris-Stack--alignmentTrailing {
+  height: 100%;
+}
+
+.combiner-form-wrapper ul.Polaris-ChoiceList__Choices,
+.remover-form-wrapper ul.Polaris-ChoiceList__Choices {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.combiner-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+  flex-basis: 100%;
+}
+
+.remover-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 576px) {
+  .combiner-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 50%;
+  }
+
+  .remover-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 50%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .combiner-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 33%;
+  }
+
+  .remover-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 33%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .combiner-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 25%;
+  }
+
+  .remover-form-wrapper ul.Polaris-ChoiceList__Choices > li {
+    flex-basis: 25%;
+  }
+}
