@@ -20,6 +20,7 @@ import axios from "axios";
 import { parse } from "json2csv";
 import { map as pmap, delay as pdelay } from "bluebird";
 import isEqual from "lodash.isequal";
+import deepcopy from "deepcopy";
 import EditProductModalContent from "./EditProductModalContent";
 import {
   getDownloadLink,
