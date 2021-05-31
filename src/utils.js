@@ -348,8 +348,11 @@ export const getProductInfoToExport = (product, specificationInfo) => {
     return acc;
   }, {});
   const productInfoToExport = {
-    id: product.id,
+    // id: product.id,
+    handle: product.handle,
     title: product.title,
+    skus: product.skus.join("\n"),
+    prices: product.prices.join("\n"),
     ...specificationValuePairs,
   };
   return productInfoToExport;
@@ -508,6 +511,18 @@ export const getRawExportedData = async (client, productsQueryString) => {
                 ownerType
               }
               tags
+              variants {
+                edges {
+                  node {
+                    sku
+                    price
+                    selectedOptions {
+                      name
+                      value
+                    }
+                  }
+                }
+              }
             }
           }
         }
