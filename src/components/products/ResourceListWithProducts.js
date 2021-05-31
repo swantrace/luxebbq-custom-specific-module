@@ -171,7 +171,7 @@ function ResourceListWithProducts({
         const updateInputs = productsFromCSV
           .map((productFromCSV) => {
             const productFromQuery = rawExportedData.find(
-              ({ id }) => productFromCSV.id === id
+              ({ handle }) => productFromCSV.handle === handle
             );
             if (productFromQuery) {
               const input = getProductInputPayload(
@@ -181,7 +181,7 @@ function ResourceListWithProducts({
               );
               if (
                 isEqual(input.tags, productFromQuery.tags) &&
-                input.metafields.value === productFromQuery.metafield.value
+                input.metafields.value === productFromQuery.metafield?.value
               ) {
                 return false;
               }
@@ -224,6 +224,7 @@ function ResourceListWithProducts({
         setToastActive(true);
         setToastContent("File imported");
       } catch (err) {
+        console.log("err:", err);
         setToastActive(true);
         setToastContent(err.message);
       }
@@ -247,6 +248,26 @@ function ResourceListWithProducts({
         );
 
         const targetJSON = rawExportedData
+          .reduce((acc, cur) => {
+            if (cur.handle) {
+              return [...acc, cur];
+            }
+            const finishedProducts = acc.slice(0, acc.length - 1);
+            const currentProduct = acc[acc.length - 1];
+            const variantName = cur.selectedOptions
+              .map((option) => `[${option.name}][${option.value}]`)
+              .join(",");
+
+            currentProduct.skus = [
+              ...(currentProduct.skus ?? []),
+              `(${variantName}): ${cur.sku}`,
+            ];
+            currentProduct.prices = [
+              ...(currentProduct.prices ?? []),
+              `(${variantName}): ${cur.price}`,
+            ];
+            return [...finishedProducts, currentProduct];
+          }, [])
           .filter((product) => {
             switch (modalExportScope) {
               case "all": {
@@ -269,6 +290,8 @@ function ResourceListWithProducts({
             }
           })
           .map((product) => getProductInfoToExport(product, specificationInfo));
+
+        console.log(targetJSON);
         const targetCSV = parse(targetJSON);
         const blob = new Blob([targetCSV], { type: "text/csv" });
         const now = new Date();

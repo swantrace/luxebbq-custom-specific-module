@@ -1,5 +1,5 @@
-import { TextContainer, Stack, TextStyle, RadioButton } from '@shopify/polaris';
-import PropTypes from 'prop-types';
+import { TextContainer, Stack, TextStyle, RadioButton } from "@shopify/polaris";
+import PropTypes from "prop-types";
 
 function ExportProductsModalContent({
   modalExportIsWorking,
@@ -22,7 +22,7 @@ function ExportProductsModalContent({
   ) : (
     <Stack vertical>
       <RadioButton
-        checked={modalExportScope === 'all'}
+        checked={modalExportScope === "all"}
         label={`All the products of ${productType}`}
         id="all"
         value="all"
@@ -30,7 +30,7 @@ function ExportProductsModalContent({
         onChange={handleModalExportScopeChanged}
       />
       <RadioButton
-        checked={modalExportScope === 'filtered'}
+        checked={modalExportScope === "filtered"}
         label="All the products that meet the current filter conditions"
         id="filtered"
         value="filtered"
@@ -38,7 +38,7 @@ function ExportProductsModalContent({
         onChange={handleModalExportScopeChanged}
       />
       <RadioButton
-        checked={modalExportScope === 'page'}
+        checked={modalExportScope === "page"}
         label="All the products in the current page"
         id="page"
         value="page"
@@ -46,7 +46,7 @@ function ExportProductsModalContent({
         onChange={handleModalExportScopeChanged}
       />
       <RadioButton
-        checked={modalExportScope === 'selected'}
+        checked={modalExportScope === "selected"}
         label={`All the selected: ${selectedItems.length} products`}
         id="selected"
         value="selected"
