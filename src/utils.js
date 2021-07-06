@@ -425,7 +425,35 @@ export const getProductInputPayload = (
   return input;
 };
 
-export const getQueryString = (productType, queryValue, productVendorValue) => {
+export const convertValueToString = (key, value) => {
+  let part = "";
+  if (typeof value === "string") {
+    part = value ? `${key}:${addQuotesIfNecessary(value)} ` : "";
+  }
+  if (typeof value === "object" && Array.isArray(value) && value.length > 0) {
+    part =
+      value.length === 0
+        ? ""
+        : value.reduce((acc, cur) => {
+            let str = acc;
+            if (str === "") {
+              str = `${key}:${addQuotesIfNecessary(cur)} `;
+            } else {
+              str += `OR ${key}:${addQuotesIfNecessary(cur)} `;
+            }
+            return str;
+          }, "");
+  }
+  return part;
+};
+
+export const getQueryString = (
+  productType,
+  queryValue,
+  productVendorValue,
+  statusValue,
+  availabilityValue
+) => {
   const queryValueString =
     (queryValue?.trim() ?? "") === ""
       ? `*`
@@ -441,49 +469,55 @@ export const getQueryString = (productType, queryValue, productVendorValue) => {
       ? ""
       : `sku:${queryValueString} OR barcode:${queryValueString} OR title:${queryValueString} `;
 
-  let productTypePart = "";
-  if (typeof productType === "string") {
-    productTypePart = productType
-      ? `product_type:${addslashes(addQuotesIfNecessary(productType))} `
-      : "";
-  }
-  if (
-    typeof productType === "object" &&
-    Array.isArray(productType) &&
-    productType.length > 0
-  ) {
-    productTypePart = `${productType
-      .map((type) => `product_type:${addslashes(addQuotesIfNecessary(type))}`)
-      .join(" OR ")} `;
-  }
+  const productTypePart = convertValueToString("product_type", productType);
+  // if (typeof productType === "string") {
+  //   productTypePart = productType
+  //     ? `product_type:${addslashes(addQuotesIfNecessary(productType))} `
+  //     : "";
+  // }
+  // if (
+  //   typeof productType === "object" &&
+  //   Array.isArray(productType) &&
+  //   productType.length > 0
+  // ) {
+  //   productTypePart = `${productType
+  //     .map((type) => `product_type:${addslashes(addQuotesIfNecessary(type))}`)
+  //     .join(" OR ")} `;
+  // }
 
-  let productVendorPart = "";
-  if (typeof productVendorValue === "string") {
-    productVendorPart = productVendorValue
-      ? `product_type:${addQuotesIfNecessary(productVendorValue)}`
-      : "";
-  }
-  if (
-    typeof productVendorValue === "object" &&
-    Array.isArray(productVendorValue) &&
-    productVendorValue.length > 0
-  ) {
-    productVendorPart =
-      productVendorValue.length === 0
-        ? ""
-        : productVendorValue.reduce((acc, cur) => {
-            let productVendorQueryString = acc;
-            if (productVendorQueryString === "") {
-              productVendorQueryString = `vendor:${addQuotesIfNecessary(cur)}`;
-            } else {
-              productVendorQueryString += `OR vendor:${addQuotesIfNecessary(
-                cur
-              )}`;
-            }
-            return productVendorQueryString;
-          }, "");
-  }
-  return `${queryValuePart}${productTypePart}${productVendorPart}`;
+  const productVendorPart = convertValueToString("vendor", productVendorValue);
+  // let productVendorPart = "";
+  // if (typeof productVendorValue === "string") {
+  //   productVendorPart = productVendorValue
+  //     ? `product_type:${addQuotesIfNecessary(productVendorValue)}`
+  //     : "";
+  // }
+  // if (
+  //   typeof productVendorValue === "object" &&
+  //   Array.isArray(productVendorValue) &&
+  //   productVendorValue.length > 0
+  // ) {
+  //   productVendorPart =
+  //     productVendorValue.length === 0
+  //       ? ""
+  //       : productVendorValue.reduce((acc, cur) => {
+  //           let productVendorQueryString = acc;
+  //           if (productVendorQueryString === "") {
+  //             productVendorQueryString = `vendor:${addQuotesIfNecessary(cur)}`;
+  //           } else {
+  //             productVendorQueryString += `OR vendor:${addQuotesIfNecessary(
+  //               cur
+  //             )}`;
+  //           }
+  //           return productVendorQueryString;
+  //         }, "");
+  // }
+  const statusPart = convertValueToString("status", statusValue);
+  const availabilityPart = convertValueToString(
+    "published_status",
+    availabilityValue
+  );
+  return `${queryValuePart}${productTypePart}${productVendorPart}${statusPart}${availabilityPart}`;
 };
 
 export const getRawExportedData = async (client, productsQueryString) => {

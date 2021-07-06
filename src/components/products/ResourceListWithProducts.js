@@ -20,7 +20,6 @@ import axios from "axios";
 import { parse } from "json2csv";
 import { map as pmap, delay as pdelay } from "bluebird";
 import isEqual from "lodash.isequal";
-import deepcopy from "deepcopy";
 import EditProductModalContent from "./EditProductModalContent";
 import {
   getDownloadLink,
@@ -53,6 +52,8 @@ function ResourceListWithProducts({
   const redirect = Redirect.create(app);
   const [productTypeValue, setProductTypeValue] = useState([]);
   const [productVendorValue, setProductVendorValue] = useState([]);
+  const [statusValue, setStatusValue] = useState([]);
+  const [availabilityValue, setAvailabilityValue] = useState([]);
   const [queryValue, setQueryValue] = useState("");
   const [sortValue, setSortValule] = useState("TITLE_ASC");
   const [selectedItems, setSelectedItems] = useState([]);
@@ -79,7 +80,13 @@ function ResourceListWithProducts({
     {
       variables: {
         first: 50,
-        query: `${getQueryString(productType, queryValue, productVendorValue)}`,
+        query: `${getQueryString(
+          productType,
+          queryValue,
+          productVendorValue,
+          statusValue,
+          availabilityValue
+        )}`,
         reverse: !!sortValue.includes("DESC"),
         sortKey: sortValue.replace("_DESC", "").replace("_ASC", ""),
       },
@@ -93,7 +100,15 @@ function ResourceListWithProducts({
 
   useEffect(() => {
     refetch();
-  }, [queryValue, productTypeValue, productVendorValue, sortValue, refetch]);
+  }, [
+    queryValue,
+    productTypeValue,
+    productVendorValue,
+    statusValue,
+    availabilityValue,
+    sortValue,
+    refetch,
+  ]);
 
   useEffect(() => {
     setModalStatus(modalStatusFromImportOrExport);
@@ -167,7 +182,7 @@ function ResourceListWithProducts({
 
         const rawExportedData = await getRawExportedData(
           client,
-          `"${getQueryString(productType, "", [])}"`
+          `"${getQueryString(productType, "", [], [], [])}"`
         );
         const updateInputs = productsFromCSV
           .map((productFromCSV) => {
@@ -236,11 +251,13 @@ function ResourceListWithProducts({
         setModalExportIsWorking(true);
         const productsQueryString =
           modalExportScope !== "filtered"
-            ? `"${getQueryString(productType, "", [])}"`
+            ? `"${getQueryString(productType, "", [], [], [])}"`
             : `"${getQueryString(
                 productType,
                 queryValue,
-                productVendorValue
+                productVendorValue,
+                statusValue,
+                availabilityValue
               )}"`;
 
         const rawExportedData = await getRawExportedData(
@@ -351,7 +368,15 @@ function ResourceListWithProducts({
     setQueryValue("");
     setProductTypeValue([]);
     setProductVendorValue([]);
-  }, [setQueryValue, setProductTypeValue, setProductVendorValue]);
+    setStatusValue([]);
+    setAvailabilityValue([]);
+  }, [
+    setQueryValue,
+    setProductTypeValue,
+    setProductVendorValue,
+    setStatusValue,
+    setAvailabilityValue,
+  ]);
 
   const handleEditProductButtonClicked = (id) => {
     redirect.dispatch(Redirect.Action.ADMIN_PATH, {
@@ -490,8 +515,12 @@ function ResourceListWithProducts({
             {...{
               queryValue,
               productVendorValue,
+              statusValue,
+              availabilityValue,
               setQueryValue,
               setProductVendorValue,
+              setStatusValue,
+              setAvailabilityValue,
               handleClearAll,
             }}
           />
