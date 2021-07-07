@@ -250,9 +250,9 @@ function DangerousZone({ setToastContent, setToastActive }) {
     setSelectedProductTypeTabIndex(selectedTabIndex);
   };
 
-  const handleTagsRemoverConfirmButtonClicked = async (e) => {
-    console.log(e);
-    console.log(tagsToRemove, productsToClearTags);
+  const handleTagsRemoverConfirmButtonClicked = async () => {
+    // console.log(e);
+    // console.log(tagsToRemove, productsToClearTags);
     setHardWorking(true);
     try {
       const productsLength = productsToClearTags.length;

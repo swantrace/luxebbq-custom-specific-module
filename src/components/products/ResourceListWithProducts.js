@@ -75,18 +75,30 @@ function ResourceListWithProducts({
   });
   const modalContentWrapperRef = useRef();
   const [updateProduct] = useMutation(UPDATE_PRODUCT);
+
+  // console.log(
+  //   "79.queryString: ",
+  //   getQueryString(
+  //     productType,
+  //     queryValue,
+  //     productVendorValue,
+  //     statusValue,
+  //     availabilityValue
+  //   )
+  // );
+
   const { loading, data: dataWithProducts, refetch, fetchMore } = useQuery(
     GET_PRODUCTS,
     {
       variables: {
         first: 50,
-        query: `${getQueryString(
+        query: getQueryString(
           productType,
           queryValue,
           productVendorValue,
           statusValue,
           availabilityValue
-        )}`,
+        ),
         reverse: !!sortValue.includes("DESC"),
         sortKey: sortValue.replace("_DESC", "").replace("_ASC", ""),
       },
@@ -182,7 +194,7 @@ function ResourceListWithProducts({
 
         const rawExportedData = await getRawExportedData(
           client,
-          `"${getQueryString(productType, "", [], [], [])}"`
+          getQueryString(productType, "", [], [], [])
         );
         const updateInputs = productsFromCSV
           .map((productFromCSV) => {
@@ -251,15 +263,16 @@ function ResourceListWithProducts({
         setModalExportIsWorking(true);
         const productsQueryString =
           modalExportScope !== "filtered"
-            ? `"${getQueryString(productType, "", [], [], [])}"`
-            : `"${getQueryString(
+            ? getQueryString(productType, "", [], [], [])
+            : getQueryString(
                 productType,
                 queryValue,
                 productVendorValue,
                 statusValue,
                 availabilityValue
-              )}"`;
+              );
 
+        // console.log("productsQueryString: ", productsQueryString);
         const rawExportedData = await getRawExportedData(
           client,
           productsQueryString

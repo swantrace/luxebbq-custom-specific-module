@@ -23,9 +23,9 @@ function ProductsFilterControl({
           allowMultiple
           title=""
           choices={[
-            { label: "Acive", value: '"ACTIVE"' },
-            { label: "Draft", value: '"DRAFT"' },
-            { label: "Archived", value: '"ARCHIVED"' },
+            { label: "Active", value: "ACTIVE" },
+            { label: "Draft", value: "DRAFT" },
+            { label: "Archived", value: "ARCHIVED" },
           ]}
           selected={statusValue}
           onChange={setStatusValue}
@@ -40,14 +40,14 @@ function ProductsFilterControl({
         <ChoiceList
           title=""
           choices={[
-            { label: "Unavailable on all channels", value: '"unavailable"' },
+            { label: "Unavailable on all channels", value: "unavailable" },
             {
               label: "Available on Online Store",
-              value: '"online_store:visible"',
+              value: "online_store:visible",
             },
             {
               label: "Unavailable on Online Store",
-              value: '"online_store:hidden"',
+              value: "online_store:hidden",
             },
           ]}
           selected={availabilityValue}

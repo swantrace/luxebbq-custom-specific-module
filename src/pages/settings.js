@@ -67,7 +67,7 @@ const Settings = () => {
 
   const handleImportCancelButtonClicked = () => {
     const form = importExportFormWrapperRef.current.querySelector("form");
-    console.log("form", form);
+    // console.log("form", form);
     const fileInput = form.querySelector('input[type="file"]');
     fileInput.value = "";
     setImportFileFormData(null);
@@ -80,7 +80,7 @@ const Settings = () => {
         ({ key }) => key === "similar"
       );
       const infoMetafield = shopMetafields.find(({ key }) => key === "info");
-      console.log(similarMetafield, infoMetafield);
+      // console.log(similarMetafield, infoMetafield);
       const objectToExport = {};
       if (similarMetafield) {
         objectToExport.similar = JSON.parse(similarMetafield.value);
@@ -89,7 +89,7 @@ const Settings = () => {
         objectToExport.info = JSON.parse(infoMetafield.value);
       }
       const jsonToExport = JSON.stringify(objectToExport);
-      console.log(jsonToExport);
+      // console.log(jsonToExport);
       const blob = new Blob([jsonToExport], { type: "application/json" });
       const now = new Date();
       const fileName = `${now.toDateString()} ${
@@ -115,7 +115,7 @@ const Settings = () => {
 
       const newInfoObject = specificationFromJson.info;
       const newSimilarObject = specificationFromJson.similar;
-      console.log(newInfoObject, newSimilarObject);
+      // console.log(newInfoObject, newSimilarObject);
       if (newInfoObject) {
         const newInfoMetafield = await axios
           .post("/createMetafield", {

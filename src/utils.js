@@ -362,7 +362,7 @@ export const addslashes = (str) =>
   `${str}`.replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");
 
 export const addQuotesIfNecessary = (cur) => {
-  return cur.split(/\s+/).length > 1 ? `"${cur}"` : cur;
+  return cur.split(/[\s|:]+/).length > 1 ? `"${cur}"` : cur;
 };
 
 export const titleCase = (string) =>
@@ -457,67 +457,26 @@ export const getQueryString = (
   const queryValueString =
     (queryValue?.trim() ?? "") === ""
       ? `*`
-      : `${addslashes(
-          addQuotesIfNecessary(
-            queryValue.trim().split(" ").length > 1
-              ? queryValue.trim().split(" ").slice(0, -1).join(" ")
-              : queryValue.trim()
-          )
-        )}*`;
+      : `${addQuotesIfNecessary(
+          queryValue.trim().split(" ").length > 1
+            ? `${queryValue.trim().split(" ").slice(0, -1).join(" ")}*`
+            : `${queryValue.trim()}*`
+        )}`;
+
+  // console.log("queryValueString", queryValueString);
   const queryValuePart =
     (queryValue?.trim() ?? "") === ""
       ? ""
       : `sku:${queryValueString} OR barcode:${queryValueString} OR title:${queryValueString} `;
 
   const productTypePart = convertValueToString("product_type", productType);
-  // if (typeof productType === "string") {
-  //   productTypePart = productType
-  //     ? `product_type:${addslashes(addQuotesIfNecessary(productType))} `
-  //     : "";
-  // }
-  // if (
-  //   typeof productType === "object" &&
-  //   Array.isArray(productType) &&
-  //   productType.length > 0
-  // ) {
-  //   productTypePart = `${productType
-  //     .map((type) => `product_type:${addslashes(addQuotesIfNecessary(type))}`)
-  //     .join(" OR ")} `;
-  // }
-
   const productVendorPart = convertValueToString("vendor", productVendorValue);
-  // let productVendorPart = "";
-  // if (typeof productVendorValue === "string") {
-  //   productVendorPart = productVendorValue
-  //     ? `product_type:${addQuotesIfNecessary(productVendorValue)}`
-  //     : "";
-  // }
-  // if (
-  //   typeof productVendorValue === "object" &&
-  //   Array.isArray(productVendorValue) &&
-  //   productVendorValue.length > 0
-  // ) {
-  //   productVendorPart =
-  //     productVendorValue.length === 0
-  //       ? ""
-  //       : productVendorValue.reduce((acc, cur) => {
-  //           let productVendorQueryString = acc;
-  //           if (productVendorQueryString === "") {
-  //             productVendorQueryString = `vendor:${addQuotesIfNecessary(cur)}`;
-  //           } else {
-  //             productVendorQueryString += `OR vendor:${addQuotesIfNecessary(
-  //               cur
-  //             )}`;
-  //           }
-  //           return productVendorQueryString;
-  //         }, "");
-  // }
   const statusPart = convertValueToString("status", statusValue);
   const availabilityPart = convertValueToString(
     "published_status",
     availabilityValue
   );
-  return `${queryValuePart}${productTypePart}${productVendorPart}${statusPart}${availabilityPart}`;
+  return `${queryValuePart}${productTypePart}${productVendorPart}${statusPart}${availabilityPart}`.trim();
 };
 
 export const getRawExportedData = async (client, productsQueryString) => {
@@ -526,7 +485,7 @@ export const getRawExportedData = async (client, productsQueryString) => {
     variables: {
       query: `
       {
-        products(query: ${productsQueryString}) {
+        products(query: "${addslashes(productsQueryString)}") {
           edges {
             node {
               id
