@@ -146,19 +146,21 @@ function SpecificationRulesForm({
 
   return (
     <Form onSubmit={handleSpecificationRulesFormSubmitted}>
-      {Object.values(toBeSubmittedSpecificationRules).map((rule) => (
-        <Card sectioned key={rule.name}>
-          <FormLayout>
-            <SettingRuleInputs
-              rule={rule}
-              handleSpecificationRuleRemoverButtonClicked={
-                handleSpecificationRuleRemoverButtonClicked
-              }
-              handleSpecificationRuleChanged={handleSpecificationRuleChanged}
-            />
-          </FormLayout>
-        </Card>
-      ))}
+      {Object.values(toBeSubmittedSpecificationRules).map((rule) => {
+        return (
+          <Card sectioned key={`${rule.label}`}>
+            <FormLayout>
+              <SettingRuleInputs
+                rule={rule}
+                handleSpecificationRuleRemoverButtonClicked={
+                  handleSpecificationRuleRemoverButtonClicked
+                }
+                handleSpecificationRuleChanged={handleSpecificationRuleChanged}
+              />
+            </FormLayout>
+          </Card>
+        );
+      })}
       <Card sectioned>
         <FormLayout>
           <Stack alignment="trailing">
