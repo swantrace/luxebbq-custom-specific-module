@@ -137,6 +137,7 @@ app.prepare().then(() => {
             });
         });
       const results = await readCsv();
+      console.log("results: ", results);
       ctx.body = results;
       ctx.res.statusCode = 200;
     } catch (err) {

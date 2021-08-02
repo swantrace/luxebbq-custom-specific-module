@@ -192,6 +192,14 @@ function ResourceListWithProducts({
           })
           .then((response) => response.data);
 
+        console.log(
+          "formData: ",
+          formData,
+          "\n",
+          "productsFromCSV: ",
+          productsFromCSV
+        );
+
         const rawExportedData = await getRawExportedData(
           client,
           getQueryString(productType, "", [], [], [])
