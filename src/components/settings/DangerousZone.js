@@ -215,7 +215,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
       ) {
         const rawExportedData = await getRawExportedData(
           client,
-          `"${getQueryString(oldProductTypeNames, "", [])}"`
+          `${getQueryString(oldProductTypeNames, "", [])}`
         );
         const productsLength = rawExportedData.length;
         setLeftProducts(productsLength);

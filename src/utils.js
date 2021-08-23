@@ -428,7 +428,7 @@ export const getProductInputPayload = (
 export const convertValueToString = (key, value) => {
   let part = "";
   if (typeof value === "string") {
-    part = value ? `${key}:${addQuotesIfNecessary(value)} ` : "";
+    part = value ? `${key}:${addslashes(addQuotesIfNecessary(value))} ` : "";
   }
   if (typeof value === "object" && Array.isArray(value) && value.length > 0) {
     part =
@@ -437,9 +437,9 @@ export const convertValueToString = (key, value) => {
         : value.reduce((acc, cur) => {
             let str = acc;
             if (str === "") {
-              str = `${key}:${addQuotesIfNecessary(cur)} `;
+              str = `${key}:${addslashes(addQuotesIfNecessary(cur))} `;
             } else {
-              str += `OR ${key}:${addQuotesIfNecessary(cur)} `;
+              str += `OR ${key}:${addslashes(addQuotesIfNecessary(cur))} `;
             }
             return str;
           }, "");
@@ -480,12 +480,14 @@ export const getQueryString = (
 };
 
 export const getRawExportedData = async (client, productsQueryString) => {
+  console.log("productQueryString: ", productsQueryString);
+
   const { data } = await client.mutate({
     mutation: GET_PRODUCTS_IN_BULK,
     variables: {
       query: `
       {
-        products(query: "${addslashes(productsQueryString)}") {
+        products(query: "${productsQueryString}") {
           edges {
             node {
               id
@@ -522,6 +524,7 @@ export const getRawExportedData = async (client, productsQueryString) => {
       }`,
     },
   });
+
   if ((data?.bulkOperationRunQuery?.userErrors?.length ?? 0) > 0) {
     throw new Error(
       data.bulkOperationRunQuery.userErrors.map((error) => error.message)
@@ -538,12 +541,14 @@ export const getRawExportedData = async (client, productsQueryString) => {
           dataWithBulkOperationInfo.currentBulkOperation.status === "COMPLETED"
         ) {
           clearInterval(interval);
+          console.log(dataWithBulkOperationInfo);
           resolve(dataWithBulkOperationInfo.currentBulkOperation.url);
         }
       }, 2000);
     });
 
   const url = await bulkOperationCompleted();
+  console.log("url: ", url);
   const rawExportedData = await axios
     .get("/getFile", { params: { url } })
     .then((response) => response.data);
