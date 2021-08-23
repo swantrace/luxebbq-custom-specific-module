@@ -108,6 +108,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
       setToastContent("Finish removing all specifications");
       setToastActive(true);
     } catch (err) {
+      console.error(err);
       setToastContent("Failed to update tags, because ", err.message);
       setToastActive(true);
     }
@@ -138,17 +139,19 @@ function DangerousZone({ setToastContent, setToastActive }) {
           return acc;
         }, {});
 
+      console.log("toBeSubmittedValues: ", toBeSubmittedValues);
       const rawExportedData = await getRawExportedData(
         client,
-        `"${getQueryString(Object.keys(toBeSubmittedValues), "", [])}"`
+        `${getQueryString(Object.keys(toBeSubmittedValues), "", [])}`
       );
       const productsLength = rawExportedData.length;
       setLeftProducts(productsLength);
       const updateInputs = rawExportedData
         .map((product) => {
           const { id, tags: originalTags, productType } = product;
+          console.log("originalTags: ", originalTags);
           const tags = uniq(
-            product.tags.reduce((acc, currentOldTag) => {
+            (originalTags ?? []).reduce((acc, currentOldTag) => {
               let copiedAcc = [...acc, currentOldTag];
               if (
                 toBeSubmittedValues[productType][
@@ -179,6 +182,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
       setToastContent("Finish adding all tags");
       setToastActive(true);
     } catch (err) {
+      console.error(err);
       setLeftProducts(0);
       setHardWorking(false);
       setToastContent("Failed to duplicate tags, because ", err.message);
@@ -237,6 +241,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
       setToastContent("Finish combining product types");
       setToastActive(true);
     } catch (err) {
+      console.error(err);
       setLeftProducts(0);
       setHardWorking(false);
       setToastContent("Failed to combine product types, because ", err.message);
@@ -287,6 +292,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
       setToastContent("Finish removing product tags");
       setToastActive(true);
     } catch (err) {
+      console.error(err);
       setLeftProducts(0);
       setHardWorking(false);
       setToastContent("Failed to remove product tags, because ", err.message);
