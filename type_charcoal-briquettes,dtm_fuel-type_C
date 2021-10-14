@@ -1,0 +1,120 @@
+type_charcoal-briquettes,dtm_fuel-type_Charcoal Briquettes
+type_lump-charcoal,dtm_fuel-type_Lump Charcoal
+type_propane,dtm_fuel-type_Propane
+type_smoking-chips,dtm_fuel-type_Wood Chips
+type_smoking-planks,dtm_fuel-type_Wood Planks
+type_smoking-bisquettes,dtm_fuel-type_Smoking Bisquettes
+type_smoking-chunks,dtm_fuel-type_Wood Chunks
+type_wood-logs,dtm_fuel-type_Wood Logs
+type_wood-pellets,dtm_fuel-type_Wood Pellets
+
+
+type_burners,dtm_parts-type_Burners
+type_castors,dtm_parts-type_Castors
+type_cooking-grates,dtm_parts-type_Cooking Grates
+type_handles,dtm_parts-type_Handles
+type_heat-deflectors,dtm_parts-type_Heat Deflectors
+type_hoses,dtm_parts-type_Hoses
+type_igniters,dtm_parts-type_Ignitors
+type_replacement-parts,dtm_parts-type_Replacement Parts
+
+
+
+type_baking-mixes,dtm_food-type_Baking Mixes
+Type_brines,dtm_food-type_Brines/Injections
+type_injections,dtm_food-type_Brines/Injections
+type_condiments,dtm_food-type_Condiments
+type_cooking-spray,dtm_food-type_Cooking Spray
+type_drink-mix,dtm_food-type_Drink Mixes
+Type_rubs,dtm_food-type_Rubs/Spices
+type_spices,dtm_food-type_Rubs/Spices
+type_sauces,dtm_food-type_Sauces
+
+
+
+specialty-foods_gluten-free,dtm_specialty-foods_Gluten Free
+specialty-foods_hot-sauce,dtm_specialty-foods_Hot Sauce
+specialty-foods_low-or-sodium-free,dtm_specialty-foods_Low or Sodium Free
+specialty-foods_sugar-free,dtm_specialty-foods_Sugar Free
+
+// Furniture
+type_fire-tables,dtm_furniture-type_Fire Tables
+
+// Drinkware & Coolers Collection
+type_coolers,dtm_drinkware-coolers-type_Coolers
+type_cooler-accessories,dtm_drinkware-coolers-type_Cooler Accessories
+type_drinkware,dtm_drinkware-coolers-type_Drinkware
+type_accessories,dtm_drinkware-coolers-type_Drinkware Accessories
+
+colour_aquifer-blue,dtm_product-colour_Aquifer Blue
+colour_black,dtm_product-colour_Black
+colour_brick-red,dtm_product-colour_Brick Red
+colour_camo,dtm_product-colour_Camo
+colour_canyon-red,dtm_product-colour_Canyon Red
+colour_caribbean-blue,dtm_product-colour_Caribbean Blue
+colour_charcoal,dtm_product-colour_Charcoal
+colour_chartreuse,dtm_product-colour_Chartreuse
+colour_clay,dtm_product-colour_Clay
+colour_copper,dtm_product-colour_Copper
+colour_coral,dtm_product-colour_Coral
+colour_granite-grey,dtm_product-colour_Granite Grey
+colour_graphite,dtm_product-colour_Graphite
+colour_harbour-pink,dtm_product-colour_Harbour Pink
+colour_lilac,dtm_product-colour_Lilac
+colour_mermaid,dtm_product-colour_Mermaid
+colour_mint,dtm_product-colour_Mint
+colour_fog-grey,dtm_product-colour_Fog Grey
+colour_navy,dtm_product-colour_Navy
+colour_prickly-pear-pink,dtm_product-colour_Prickly Pear Pink
+colour_reef-blue,dtm_product-colour_Reef Blue
+colour_river-green,dtm_product-colour_River Green
+colour_rose-gold,dtm_product-colour_Rose Gold
+colour_stainless,dtm_product-colour_Stainless
+colour_sagebrush-green,dtm_product-colour_Sagebrush Green
+colour_sagebush-green,dtm_product-colour_Sagebrush Green
+colour_seafoam,dtm_product-colour_Seafoam
+colour_tan,dtm_product-colour_Tan
+colour_white,dtm_product-colour_White
+
+// Grilling Accessories
+
+Type_Barbeque-Tools,dtm_grilling-accessories-type_BBQ Tools
+Type_Cleaning-Tools,dtm_grilling-accessories-type_Cleaning & Maintenance
+Type_cookware,dtm_grilling-accessories-type_Cookware
+Type_Cookware,dtm_grilling-accessories-type_Cookware
+type_covers,dtm_grilling-accessories-type_Covers
+type_disposable-pans,dtm_grilling-accessories-type_Disposable Pans
+type_rotisseries,dtm_grilling-accessories-type_Rotisseries
+
+
+type_smoking-accessories, dtm_grilling-accessories-type_Smoking Accessories
+type_textiles,dtm_grilling-accessories-type_Textiles
+type_thermometers,dtm_grilling-accessories-type_Thermometers
+
+
+Type_Aprons,dtm_lifestyle-accessories-type_Apparel
+type_apparel,dtm_lifestyle-accessories-type_Apparel
+Type_Shirts,dtm_lifestyle-accessories-type_Apparel
+Type_Hats,dtm_lifestyle-accessories-type_Apparel
+Type_Hoodies,dtm_lifestyle-accessories-type_Apparel
+Type_Cook Books,dtm_lifestyle-accessories-type_Cookbook
+Type_Luxe Bucket,dtm_lifestyle-accessories-type_Luxe Bucket
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

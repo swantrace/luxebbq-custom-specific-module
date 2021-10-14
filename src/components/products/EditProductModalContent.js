@@ -1,44 +1,44 @@
-import { Form, FormLayout } from '@shopify/polaris';
-import PropTypes from 'prop-types';
-import EditProductCheckbox from './EditProductCheckbox';
-import EditProductSelect from './EditProductSelect';
-import EditProductText from './EditProductText';
-import EditProductTextArea from './EditProductTextArea';
-import EditProductNumber from './EditProductNumber';
-import EditProductChoiceList from './EditProductChoiceList';
+import { Form, FormLayout } from "@shopify/polaris";
+import PropTypes from "prop-types";
+import EditProductCheckbox from "./EditProductCheckbox";
+import EditProductSelect from "./EditProductSelect";
+import EditProductText from "./EditProductText";
+import EditProductTextArea from "./EditProductTextArea";
+import EditProductNumber from "./EditProductNumber";
+import EditProductChoiceList from "./EditProductChoiceList";
 
 function EditProductModalContent({ specificationInfoWithValues }) {
   const specificationInputs = (
     <FormLayout>
       {Object.values(specificationInfoWithValues).map((specification) => {
         switch (specification.type) {
-          case 'single-select':
+          case "single-select":
             return (
               <EditProductSelect key={specification.name} {...specification} />
             );
-          case 'multi-select':
+          case "multi-select":
             return (
               <EditProductChoiceList
                 key={specification.name}
                 {...specification}
               />
             );
-          case 'text':
+          case "text":
             return (
               <EditProductText key={specification.name} {...specification} />
             );
-          case 'textarea':
+          case "textarea":
             return (
               <EditProductTextArea
                 key={specification.name}
                 {...specification}
               />
             );
-          case 'number':
+          case "number":
             return (
               <EditProductNumber key={specification.name} {...specification} />
             );
-          case 'checkbox':
+          case "checkbox":
             return (
               <EditProductCheckbox
                 key={specification.name}

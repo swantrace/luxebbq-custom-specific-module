@@ -192,18 +192,25 @@ function ResourceListWithProducts({
           })
           .then((response) => response.data);
 
+        const rawExportedData = await getRawExportedData(
+          client,
+          getQueryString(productType, "", [], [], [])
+        );
+
         console.log(
           "formData: ",
           formData,
           "\n",
           "productsFromCSV: ",
-          productsFromCSV
+          productsFromCSV,
+          "\n",
+          "rawExportData",
+          rawExportedData,
+          "\n",
+          "productType",
+          productType
         );
 
-        const rawExportedData = await getRawExportedData(
-          client,
-          getQueryString(productType, "", [], [], [])
-        );
         const updateInputs = productsFromCSV
           .map((productFromCSV) => {
             const productFromQuery = rawExportedData.find(
@@ -366,6 +373,7 @@ function ResourceListWithProducts({
           modalEditingProduct,
           specificationInfo
         );
+
         await updateProduct({ variables: { input } });
         setToastActive(true);
         setToastContent("Changes saved");

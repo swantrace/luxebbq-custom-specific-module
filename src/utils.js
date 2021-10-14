@@ -299,7 +299,9 @@ export const getModalEditingProductUpdateInfo = (
             }
             break;
           case "checkbox":
-            acc.tags = [...acc.tags, `dtm_${specificationName}`];
+            if (newValue.toLowerCase() === "true") {
+              acc.tags = [...acc.tags, `dtm_${specificationName}`];
+            }
             break;
           default:
             acc.tags = [...acc.tags, `dtm_${specificationName}_${newValue}`];
