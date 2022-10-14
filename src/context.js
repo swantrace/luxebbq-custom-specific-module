@@ -28,7 +28,7 @@ const GET_SHOP_INFO = gql`
             legacyResourceId
             namespace
             value
-            valueType
+            type
             ownerType
           }
         }

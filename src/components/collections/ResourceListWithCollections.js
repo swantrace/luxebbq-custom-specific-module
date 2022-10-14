@@ -33,7 +33,7 @@ const GET_COLLECTIONS = gql`
             legacyResourceId
             namespace
             value
-            valueType
+            type
             ownerType
           }
         }
@@ -61,7 +61,7 @@ const GET_COLLECTION = gql`
         legacyResourceId
         namespace
         value
-        valueType
+        type
         ownerType
       }
     }
@@ -84,7 +84,7 @@ const UPDATE_COLLECTION = gql`
           legacyResourceId
           namespace
           value
-          valueType
+          type
           ownerType
         }
       }
@@ -156,7 +156,7 @@ function ResourceListWithCollections({ setToastActive, setToastContent }) {
       metafields: {
         key: 'info',
         namespace: 'dtm',
-        valueType: 'JSON_STRING',
+        type: "json",
         value: JSON.stringify({ images: toBeSubmittedImageInfoArray }),
       },
     };

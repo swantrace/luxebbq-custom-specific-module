@@ -91,7 +91,7 @@ function DangerousZone({ setToastContent, setToastActive }) {
         const metafields = {
           key: "info",
           namespace: "dtm",
-          valueType: "JSON_STRING",
+          type: "json",
           value: JSON.stringify({}),
         };
         if (product.metafield.id) {
@@ -155,13 +155,13 @@ function DangerousZone({ setToastContent, setToastActive }) {
               let copiedAcc = [...acc, currentOldTag];
               if (
                 toBeSubmittedValues[productType][
-                  currentOldTag.trim().replaceAll(/\s+/g, "-").toLowerCase()
+                currentOldTag.trim().replaceAll(/\s+/g, "-").toLowerCase()
                 ]
               ) {
                 copiedAcc = [
                   ...copiedAcc,
                   toBeSubmittedValues[productType][
-                    currentOldTag.replace(/\s+/g, "-").toLowerCase().trim()
+                  currentOldTag.replace(/\s+/g, "-").toLowerCase().trim()
                   ],
                 ];
               }
@@ -312,8 +312,8 @@ function DangerousZone({ setToastContent, setToastActive }) {
                 {leftProducts > 0
                   ? `${leftProducts} products left to update`
                   : hardWorking
-                  ? `I am grabbing product info now`
-                  : `I am not working now`}
+                    ? `I am grabbing product info now`
+                    : `I am not working now`}
               </TextStyle>
             </div>
           </Stack.Item>

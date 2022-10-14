@@ -30,7 +30,7 @@ const createShopifyAPINode = async (ctx, nextStep) => {
   shopify ??= new Shopify({
     shopName,
     accessToken,
-    apiVersion: "2021-01",
+    apiVersion: "2022-10",
   });
   ctx.shopify = shopify;
   await nextStep();
@@ -66,7 +66,7 @@ app.prepare().then(() => {
   );
   server.use(
     graphQLProxy({
-      version: "2021-01",
+      version: "2022-10",
     })
   );
   server.use(

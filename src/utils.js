@@ -65,7 +65,7 @@ export const UPDATE_PRODUCT = gql`
           legacyResourceId
           namespace
           value
-          valueType
+          type
           ownerType
         }
         tags
@@ -115,7 +115,7 @@ export const GET_PRODUCTS = gql`
             legacyResourceId
             namespace
             value
-            valueType
+            type
             ownerType
           }
           tags
@@ -143,7 +143,7 @@ export const GET_PRODUCT = gql`
         legacyResourceId
         namespace
         value
-        valueType
+        type
         ownerType
       }
       tags
@@ -417,7 +417,7 @@ export const getProductInputPayload = (
   input.metafields = {
     key: "info",
     namespace: "dtm",
-    valueType: "JSON_STRING",
+    type: "json",
     value: JSON.stringify(metafield),
   };
   if (product?.metafield?.id) {
@@ -437,14 +437,14 @@ export const convertValueToString = (key, value) => {
       value.length === 0
         ? ""
         : value.reduce((acc, cur) => {
-            let str = acc;
-            if (str === "") {
-              str = `${key}:${addslashes(addQuotesIfNecessary(cur))} `;
-            } else {
-              str += `OR ${key}:${addslashes(addQuotesIfNecessary(cur))} `;
-            }
-            return str;
-          }, "");
+          let str = acc;
+          if (str === "") {
+            str = `${key}:${addslashes(addQuotesIfNecessary(cur))} `;
+          } else {
+            str += `OR ${key}:${addslashes(addQuotesIfNecessary(cur))} `;
+          }
+          return str;
+        }, "");
   }
   return part;
 };
@@ -460,10 +460,10 @@ export const getQueryString = (
     (queryValue?.trim() ?? "") === ""
       ? `*`
       : `${addQuotesIfNecessary(
-          queryValue.trim().split(" ").length > 1
-            ? `${queryValue.trim().split(" ").slice(0, -1).join(" ")}*`
-            : `${queryValue.trim()}*`
-        )}`;
+        queryValue.trim().split(" ").length > 1
+          ? `${queryValue.trim().split(" ").slice(0, -1).join(" ")}*`
+          : `${queryValue.trim()}*`
+      )}`;
 
   // console.log("queryValueString", queryValueString);
   const queryValuePart =
@@ -504,7 +504,7 @@ export const getRawExportedData = async (client, productsQueryString) => {
                 legacyResourceId
                 namespace
                 value
-                valueType
+                type
                 ownerType
               }
               tags
