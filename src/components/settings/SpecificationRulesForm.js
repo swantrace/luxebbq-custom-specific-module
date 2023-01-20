@@ -53,7 +53,7 @@ function SpecificationRulesForm({
           key: "info",
           namespace: "dtm",
           owner_resource: "shop",
-          value_type: "json_string",
+          type: "json",
           value: JSON.stringify({
             ...specificationRulesFromQuery,
             [productType]: toBeSubmittedSpecificationRules,

@@ -122,7 +122,7 @@ const Settings = () => {
             key: "info",
             namespace: "dtm",
             owner_resource: "shop",
-            value_type: "json_string",
+            type: "json",
             value: JSON.stringify(newInfoObject),
           })
           .then((response) => response.data);
@@ -142,7 +142,7 @@ const Settings = () => {
             key: "similar",
             namespace: "dtm",
             owner_resource: "shop",
-            value_type: "json_string",
+            type: "json",
             value: JSON.stringify(newSimilarObject),
           })
           .then((response) => response.data);

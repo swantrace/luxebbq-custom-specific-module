@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { ApolloClient } from "apollo-boost";
 
 export const createClient = (shop, accessToken) => {

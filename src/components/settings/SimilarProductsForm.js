@@ -73,7 +73,7 @@ function SimilarProductsForm({ setToastContent, setToastActive }) {
           key: "similar",
           namespace: "dtm",
           owner_resource: "shop",
-          value_type: "json_string",
+          type: "json",
           value: JSON.stringify(selectedOptions),
         })
         .then((response) => response.data);

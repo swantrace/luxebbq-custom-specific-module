@@ -57,7 +57,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "shopify-api-node": "^3.6.5",
+    "shopify-api-node": "^3.12.1",
     "slugify": "^1.4.7"
   },
   "devDependencies": {
@@ -95,6 +95,6 @@
     ]
   },
   "engines": {
-    "node": "14.17.3"
+    "node": "^14"
   }
 }

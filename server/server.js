@@ -85,8 +85,12 @@ app.prepare().then(() => {
     createShopifyAPINode,
     async (ctx) => {
       const { shopify: shopifyInContext } = ctx;
-      ctx.body = await shopifyInContext.metafield.create(ctx.request.body);
-      ctx.res.statusCode = 200;
+      try {
+        ctx.body = await shopifyInContext.metafield.create(ctx.request.body);
+        ctx.res.statusCode = 200;
+      } catch (err) {
+        console.error(err.response.body);
+      }
     }
   );
 
@@ -97,8 +101,12 @@ app.prepare().then(() => {
     async (ctx) => {
       const { shopify: shopifyInContext } = ctx;
       const { id, ...rest } = ctx.request.body;
-      ctx.body = await shopifyInContext.metafield.update(id, rest);
-      ctx.res.statusCode = 200;
+      try {
+        ctx.body = await shopifyInContext.metafield.update(id, rest);
+        ctx.res.statusCode = 200;
+      } catch (err) {
+        console.error(err.response.body);
+      }
     }
   );
 
